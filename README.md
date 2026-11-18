@@ -1,9 +1,262 @@
-# Object-Detection
-This repository showcases an end-to-end, academic-grade Machine Learning pipeline designed for high-performance localized object detection. By leveraging transfer learning with **YOLOv8**, the system is capable of detecting and bounding multiple object classes with microsecond-latency inference (~7.4ms on commercial accelerators).
+# 🤖 YOLOv8 Object Detection System
 
-### Key Features
-* **GPU-Accelerated Setup & Verification:** Automated PyTorch, CUDA, and Ultralytics integration diagnostics.
-* **Automated Data Pipeline:** Auto-download, extraction, structure exploration, and pixel-space coordinate mapping of raw annotation formats (COCO8).
-* **Transfer Learning & Fine-Tuning:** Pretrained YOLOv8 Nano model specialized on custom detection data with detailed loss tracking (Box Loss, Class Loss, DFL Loss).
-* **Robust Evaluation Analytics:** Automatic generation of training metric curves (`results.png`) and inter-class classification analysis (`confusion_matrix.png`).
-* **Interactive Deployment:** A lightweight Streamlit-powered dashboard allowing users to upload custom images, dynamically adjust confidence thresholds, and inspect structural metadata on demand.
+**An end-to-end computer vision project that fine-tunes YOLOv8 to detect and localize objects in images using deep learning, with an interactive Streamlit interface.**
+
+---
+
+## 🚀 Overview
+
+This project implements an object detection pipeline using the Ultralytics YOLOv8 Nano model. It demonstrates how a pretrained object detection model can be fine-tuned on the COCO8 dataset to identify objects and locate them using bounding boxes.
+
+The project covers the complete workflow, including environment setup, dataset preparation, model training, evaluation, image prediction, and an interactive Streamlit application.
+
+It is designed as a practical learning project in deep learning and computer vision.
+
+---
+
+## 🎯 Objectives
+
+- Understand the fundamentals of object detection and bounding box localization.
+- Explore the YOLO annotation format and normalized coordinates.
+- Fine-tune a pretrained YOLOv8 model on an object detection dataset.
+- Monitor training losses and evaluation visualizations.
+- Perform object detection on unseen images.
+- Build an interactive interface for image-based predictions.
+
+---
+
+## ✨ Features
+
+- 🧠 **YOLOv8 Model** — Uses the pretrained YOLOv8 Nano architecture for object detection.
+- 📦 **Dataset Preparation** — Automatically downloads and extracts the COCO8 dataset.
+- 🏷️ **Annotation Exploration** — Reads YOLO-format labels and visualizes bounding boxes.
+- ⚙️ **Model Fine-Tuning** — Trains the model using configurable image size, batch size, and epochs.
+- 📊 **Training Analysis** — Displays training curves, losses, metrics, and confusion matrix.
+- 🎯 **Object Prediction** — Detects objects in images and displays bounding boxes with confidence scores.
+- 🖥️ **Interactive Web Interface** — Generates a Streamlit application for uploading images and viewing detection results.
+- 🎚️ **Confidence Control** — Allows users to adjust the confidence threshold before detection.
+
+---
+
+## 📚 Dataset
+
+**COCO8 Dataset**
+
+This project uses COCO8, a small sample dataset provided by Ultralytics for testing and learning object detection workflows.
+
+| Property | Details |
+|---|---|
+| Dataset | COCO8 |
+| Source | Ultralytics |
+| Total Images | 8 sample images |
+| Object Categories | 80 COCO classes |
+| Annotation Format | YOLO format |
+| Label Coordinates | Normalized bounding box coordinates |
+| Dataset Structure | Training and validation images with corresponding labels |
+
+### Dataset Preparation
+
+The notebook automatically:
+
+1. Downloads the COCO8 ZIP archive.
+2. Extracts the dataset.
+3. Explores the image and label directories.
+4. Reads sample annotation files.
+5. Converts normalized bounding box coordinates into pixel coordinates for visualization.
+
+**Note:** COCO8 is intended for demonstration and quick experimentation. It is not a sufficiently large dataset for developing a robust real-world object detection system.
+
+---
+
+## ⚙️ Model Training and Methodology
+
+The project uses transfer learning with the pretrained **YOLOv8 Nano (`yolov8n.pt`)** model.
+
+### Training Configuration
+
+| Parameter | Configuration |
+|---|---|
+| Model | YOLOv8 Nano |
+| Pretrained Weights | `yolov8n.pt` |
+| Dataset Configuration | `coco8.yaml` |
+| Image Size | 640 × 640 |
+| Batch Size | 8 |
+| Main Training Epochs | 10 |
+| Optimizer | Ultralytics training default |
+| Framework | PyTorch |
+| Training Platform | Google Colab |
+
+The notebook also includes an automated training workflow with a separate 5-epoch configuration.
+
+### Training Process
+
+1. Load pretrained YOLOv8 Nano weights.
+2. Prepare the COCO8 dataset.
+3. Configure the training parameters.
+4. Fine-tune the model.
+5. Save the trained model weights.
+6. Review training and validation visualizations.
+
+### Evaluation and Analysis
+
+The project uses the evaluation outputs generated by Ultralytics, including:
+
+- Training and validation loss curves.
+- Precision and recall curves.
+- Mean Average Precision (mAP) curves.
+- Confusion matrix.
+- Detection predictions on validation images.
+
+**Note:** Numerical evaluation scores are not reported here because a verified set of final metrics was not available in the repository files.
+
+---
+
+## 🛠 Tech Stack
+
+### Programming Language and Deep Learning
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![YOLOv8](https://img.shields.io/badge/YOLOv8-111F68?style=for-the-badge)
+
+### Computer Vision and Visualization
+
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white)
+
+### Application Development
+
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Pillow](https://img.shields.io/badge/Pillow-3776AB?style=for-the-badge)
+
+### Development Environment
+
+![Google Colab](https://img.shields.io/badge/Google_Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=black)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+
+---
+
+## 🚀 How to Run
+
+The main implementation is available as a Jupyter Notebook and is designed to run in Google Colab.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/alishaarif500/Object-Detection.git
+cd Object-Detection
+```
+
+### 2. Install dependencies
+
+```bash
+pip install ultralytics torch torchvision opencv-python matplotlib numpy pillow streamlit
+```
+
+### 3. Open the notebook
+
+Open `Object_Detection.ipynb` in Google Colab or Jupyter Notebook.
+
+For Google Colab:
+
+1. Upload the notebook or open it from your cloned repository.
+2. Select a GPU runtime for faster model training.
+3. Run the notebook cells in sequence.
+
+### 4. Dataset and model setup
+
+The notebook downloads the COCO8 dataset and initializes the pretrained YOLOv8 Nano model.
+
+The training workflow saves the resulting model weights and evaluation outputs in the generated run directory.
+
+### 5. Run the Streamlit application
+
+The notebook contains code that generates `app.py`.
+
+After generating the application and ensuring the required model weights are available at the path configured in the app, install Streamlit and run:
+
+```bash
+streamlit run app.py
+```
+
+The application allows users to upload an image, adjust the confidence threshold, and view detected objects with bounding boxes and confidence scores.
+
+---
+
+## 📁 Project Structure
+
+The following represents the files currently available in the GitHub repository:
+
+```text
+Object-Detection/
+│
+├── Object_Detection.ipynb
+│   # Main notebook containing the object detection pipeline
+│
+├── object_detection.py
+│   # Python export of the notebook
+│
+├── .gitignore
+│   # Git ignore configuration
+│
+└── README.md
+    # Project documentation
+```
+
+**Generated during notebook execution (not currently committed as separate repository files):**
+
+```text
+app.py
+requirements.txt
+coco8/
+runs/
+    └── detect/
+        └── yolo_project/
+            └── coco8_training/
+                └── weights/
+                    ├── best.pt
+                    └── last.pt
+```
+
+---
+
+## ⚠️ Limitations
+
+- **Small Dataset:** COCO8 contains only eight sample images, making it suitable for experimentation rather than robust model development.
+- **Limited Generalization:** Training on a very small dataset does not establish reliable performance on diverse real-world images.
+- **No Verified Benchmark:** Final numerical mAP, precision, recall, and inference speed results have not been confirmed.
+- **Model Weights:** Trained weights are generated during execution and are not currently included in the repository.
+- **Application Configuration:** The Streamlit code uses a specific trained-weight path and falls back to pretrained weights if that file is unavailable. The automated training workflow uses a different output directory, so the model path should be aligned before running the application.
+
+---
+
+## 🔮 Future Improvements
+
+- Train and evaluate the model on a larger object detection dataset.
+- Compare different YOLOv8 model sizes.
+- Perform systematic hyperparameter tuning.
+- Report numerical precision, recall, mAP@0.5, and mAP@0.5:0.95 results.
+- Add real-time webcam and video detection.
+- Improve the Streamlit interface with additional detection controls.
+- Optimize inference performance for practical applications.
+
+---
+
+## 👨‍💻 Developer
+
+**Alisha Arif** — *Computer Science Graduate | AI & Machine Learning Enthusiast*
+
+Interested in Artificial Intelligence, Machine Learning, Data Science, and Computer Vision.
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alishaarif500)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/alisha-arif-22aa42386/)
+
+---
+
+## 📄 License
+
+No license file is currently included in this repository. Please add a license before specifying reuse permissions.
+
+---
+
+⭐ **If you find this project useful, consider giving the repository a star!**
